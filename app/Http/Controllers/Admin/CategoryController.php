@@ -17,7 +17,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $data = array();
+        $common_model = new Common();      
+        $data['all_records'] = $common_model->allCategories();
         return view('admin.category.index', compact('data'));
     }
 
@@ -100,7 +101,11 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $common_model = new Common();       
+        $data['all_records'] = $common_model->allCategories();
+        $data['single_info'] = DB::table('categories')->where('category_row_id', $id)->first();
+        //dd($data['single_info']);
+        return view('admin.category.edit', ['data'=>$data]);
     }
 
     /**
