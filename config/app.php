@@ -160,5 +160,6 @@ return [
         'decodeAnimation' => true,
         'blendingColor' => 'ffffff',
     ]
+    
 
 ];

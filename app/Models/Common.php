@@ -50,4 +50,8 @@ class Common extends Model
             }
         }
     }
+
+    public function allAttributes(){
+        return $result =  Attribute::all();
+    }
 }

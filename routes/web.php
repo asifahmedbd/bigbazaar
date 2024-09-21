@@ -36,6 +36,8 @@ Route::namespace("App\Http\Controllers\Admin")->prefix('admin')->group(function(
 
     Route::get('/dashboard', 'DashboardController@index')->name('admin.home');
     Route::resource('/category', 'CategoryController');
+    Route::resource('/attributes', 'AttributesController');
+    Route::resource('/products', 'ProductController');
 
     Route::namespace('Auth')->group(function(){
         Route::get('/login', 'logincontroller@showloginform')->name('admin.login');
