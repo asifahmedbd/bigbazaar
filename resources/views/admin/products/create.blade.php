@@ -8,6 +8,48 @@
   .dark-mode input:-webkit-autofill{
     -webkit-text-fill-color: #000 !important;
   }
+
+  .atr-wrapper{
+    border-radius: 5px; border: 1px solid #ddd; background: #f7f7f5;  
+  }
+
+  .atr-wrapper .single-atr {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+      margin-left: 10px;
+  }
+
+  .atr-wrapper .single-atr .atr-title, .atr-wrapper .single-atr .icheck-primary {
+      width: 120px;
+      max-width: 120px;
+  }
+
+  .atr-wrapper .single-atr .icheck-primary .main_label{
+    font-weight: bold;
+    color: #000;
+  }
+
+  .atr-wrapper .single-atr .icheck-primary label span{
+    color: #c76e6e;
+  }
+
+  .atr-wrapper .single-atr label.cb span {
+      line-height: 20px;
+      margin-left: 30px;
+      color: #000;
+  }
+
+  .preview {
+      display: inline-block;
+      margin: 10px;
+  }
+  .preview img {
+      width: 100px;
+      height: 100px;
+      margin-right: 10px;
+  }
 </style>
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -307,16 +349,17 @@
                             </div>
                             <div class="card-body">
                               <div class="form-group">
-                                <label for="exampleInputFile">Product Gallery Images</label>
+                                <label for="file-input">Product Gallery Images</label>
                                 <div class="input-group">
                                   <div class="custom-file">
-                                    <input type="file" id="exampleInputFile"  class="custom-file-input"  name="gallery_images[]" multiple="multiple">
-                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                    <input type="file" id="file-input"  class="custom-file-input"  name="gallery_images[]" multiple>
+                                    <label class="custom-file-label" for="file-input">Choose file</label>
                                   </div>
                                   <div class="input-group-append">
                                     <span class="input-group-text">Upload</span>
                                   </div>
                                 </div>
+                                <div id="preview-container"></div>
                               </div>
                             </div>
                           <!-- /.card -->
@@ -386,6 +429,25 @@
     $(document).ready(function(){
       // Summernote
       $('#summernote').summernote();
+
+      $("#file-input").on("change", function(){
+          var files = $(this)[0].files;
+          $("#preview-container").empty();
+          if(files.length > 0){
+              for(var i = 0; i < files.length; i++){
+                  var reader = new FileReader();
+                  reader.onload = function(e){
+                      $("<div class='preview '><img src='" + e.target.result + "'><button class='delete btn btn-danger'>Delete</button></div>").appendTo("#preview-container");
+                  };
+                  reader.readAsDataURL(files[i]);
+              }
+          }
+      });
+      $("#preview-container").on("click", ".delete", function(){
+          $(this).parent(".preview").remove();
+          $("#file-input").val(""); // Clear input value if needed
+      });
+
       //Date range picker
       $('input[name="datefilter"]').daterangepicker({
           autoUpdateInput: false,

@@ -62,7 +62,9 @@ class AttributesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $all_attributes = Attribute::where('attribute_row_id', $id)->first();
+        //dd($all_attributes);
+        return view('admin.attributes.edit', compact('all_attributes'));
     }
 
     /**
@@ -70,7 +72,16 @@ class AttributesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        //dd($request);
+
+        $attribute_model = Attribute::findOrFail($request->input('attr_id'));
+
+        $attribute_model->attribute_name = $request->input('attribute_name');
+        $attribute_model->attribute_value = json_encode($request->input('attribute_values'));
+        $attribute_model->created_by = Auth::guard('admin')->user()->id;
+
+        $attribute_model->save();
+        return redirect()->route('attributes.index');
     }
 
     /**
