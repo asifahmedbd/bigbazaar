@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\CommonController;
+
 use App\Http\Middleware\TestMiddleware;
 
 Auth::routes();
@@ -39,6 +40,8 @@ Route::namespace("App\Http\Controllers\Admin")->prefix('admin')->group(function(
     Route::resource('/attributes', 'AttributesController');
     Route::resource('/products', 'ProductController');
     Route::post('/get-product-details', 'ProductController@getProductDetails')->name('get-product-details');
+
+    Route::resource('permissions', PermissionController::class);
 
     Route::namespace('Auth')->group(function(){
         Route::get('/login', 'logincontroller@showloginform')->name('admin.login');
