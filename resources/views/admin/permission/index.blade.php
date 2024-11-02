@@ -31,7 +31,7 @@
         <div class="card">
           <div class="card-header">
             <h3 class="card-title">Permission Management</h3>
-            <div><a href="{{ route('permissions.create') }}">Add New Permission</a></div>
+            <div class="btn btn-primary float-end" style="float:right"><a href="{{ route('permissions.create') }}">Add New Permission</a></div>
           </div>
           <!-- /.card-header -->
           <div class="card-body">
@@ -47,11 +47,11 @@
               <tbody>  
                     @foreach($permissions as $row)  
                     <tr>            
-                      <td>{{ $row->id }}</td> 
-                      <td align="center">{{ $permissions->name }}</td>
+                      <td>{{ $row['id'] }}</td> 
+                      <td align="center">{{ $row['name'] }}</td>
                       <td>
                         <button onclick="window.location='" class="btn btn-sm btn-warning mb-2">Edit</button>
-                        <form id="deleteCategory_{{$row->id }}" action="" style="display: inline;" method="POST">
+                        <form id="deleteCategory_{{ $row['id'] }}" action="" style="display: inline;" method="POST">
                           {{ method_field('DELETE') }}
                           @csrf
                           <input class="btn btn-sm btn-danger deleteLink"  data-toggle="modal" data-target="#category-delete-modal"  value="Delete" style="width: 100px; margin-top: -8px;">

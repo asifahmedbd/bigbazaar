@@ -35,21 +35,28 @@ Route::namespace('App\Http\Controllers')->group(function () {
 
 Route::namespace("App\Http\Controllers\Admin")->prefix('admin')->group(function(){
 
-    Route::get('/dashboard', 'DashboardController@index')->name('admin.home');
-    Route::resource('/category', 'CategoryController');
-    Route::resource('/attributes', 'AttributesController');
-    Route::resource('/products', 'ProductController');
-    Route::post('/get-product-details', 'ProductController@getProductDetails')->name('get-product-details');
-
-    Route::resource('permissions', PermissionController::class);
-
     Route::namespace('Auth')->group(function(){
-        Route::get('/login', 'logincontroller@showloginform')->name('admin.login');
+
+        Route::get('/login', 'LoginController@showloginform')->name('admin.login');
         Route::post('/login', 'LoginController@login');
         Route::post('/logout', 'LoginController@loggedout')->name('admin.logout');
 
     });
 
+    Route::middleware('admin')->group(function () {
+        Route::get('/dashboard', 'DashboardController@index')->name('admin.home');
 
+        Route::resource('/category', 'CategoryController');
+        Route::resource('/attributes', 'AttributesController');
+        Route::resource('/products', 'ProductController');
+        Route::post('/get-product-details', 'ProductController@getProductDetails')->name('get-product-details');
+
+        Route::resource('roles', 'RoleController');
+        Route::get('/roles/{roleId}/give-permissions', 'RoleController@addPermissionToRole');
+        Route::put('/roles/{roleId}/give-permissions', 'RoleController@givePermissionToRole');
+
+        Route::resource('users', 'UserController');
+        Route::resource('permissions', 'PermissionController');
+    });
 
 });
