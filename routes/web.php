@@ -31,6 +31,23 @@ Route::namespace('App\Http\Controllers')->group(function () {
     Route::get('/about-us', 'AboutUsController@index')->middleware('testMiddleware');
     Route::get('/{pages}', 'CommonController')->name('pages')->where('pages','about|contact|terms');
 
+    Route::get('/send-mail', function () {
+
+        $details = [
+    
+            'title' => 'Mail from CDIP',
+            'body' => 'This is for testing email using smtp'
+    
+        ];
+
+        \Mail::to('romeoasif@gmail.com')->send(new \App\Mail\CategoryEmail($details));
+    
+       
+    
+        dd("Email is Sent.");
+    
+    });
+
 });
 
 Route::namespace("App\Http\Controllers\Admin")->prefix('admin')->group(function(){

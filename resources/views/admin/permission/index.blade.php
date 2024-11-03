@@ -31,7 +31,7 @@
         <div class="card">
           <div class="card-header">
             <h3 class="card-title">Permission Management</h3>
-            <div class="btn btn-primary float-end" style="float:right"><a href="{{ route('permissions.create') }}">Add New Permission</a></div>
+            <a class="btn btn-primary float-end" style="float:right" href="{{ route('permissions.create') }}">Add New Permission</a>
           </div>
           <!-- /.card-header -->
           <div class="card-body">

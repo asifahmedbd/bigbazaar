@@ -32,9 +32,9 @@
           <div class="card-header">
             <h3 class="card-title">Roles Management</h3>
             <div class="pull-right" style="float:right">
-              
+              @can('role-create')
               <a class="btn btn-success mb-2" href="{{ route('roles.create') }}"><i class="fa fa-plus"></i> Create New Role</a>
-             
+              @endcan
           </div>
           </div>
           <!-- /.card-header -->
