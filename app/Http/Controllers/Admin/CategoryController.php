@@ -58,7 +58,7 @@ class CategoryController extends Controller
             $category_image->move(public_path('uploads/category').'/original/',$filename);
             
             $image_resize = Image::read(public_path('uploads/category').'/original/'.$filename);
-            $image_resize->resize(200, null, function ($constraint) {
+            $image_resize->resize(200, 200, function ($constraint) {
                 $constraint->aspectRatio();
             });
             $image_resize->save(public_path('uploads/category').'/thumbnail/'.$filename);

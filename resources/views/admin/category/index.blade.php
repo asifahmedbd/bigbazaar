@@ -59,7 +59,7 @@
 		                         </td> 
 		                        <td align="center">
 		                        	@if($row->category_image != null)
-		                        	<img src="{{ asset('uploads/category/thumbnail').'/'.$row->category_image }}" alt="" width="80px">
+		                        	<img src="{{ asset('uploads/category/thumbnail').'/'.$row->category_image }}" alt=""  width="80px" height="80px">
 		                        	@else
 		                        	<img src="{{ asset('images/no-image-found.jpg') }}" alt="" width="50px" height="50px">
 		                        	@endif
