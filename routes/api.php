@@ -14,3 +14,5 @@ Route::get('/getProductsByCategoryId/{cid}', [ApiController::class, 'getProducts
 Route::get('/getProductsById/{pid}', [ApiController::class, 'getProductsById'])->name('get-products-by-id');
 
 Route::get('/products/search', [ApiController::class, 'search']);
+
+Route::post('/submitOrderDetails', [ApiController::class, 'submitOrderDetails']);
